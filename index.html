@@ -1,18 +1,282 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Galeria</title>
+    <title>Galeria: Melhor do que nos Filmes × Não é como nos Filmes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subtitulo {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.2rem;
+            font-style: italic;
+        }
+
+        .galeria {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, auto);
+            gap: 25px;
+            margin-bottom: 2rem;
+        }
+
+        .livro-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .livro-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .livro-imagem {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .livro-card:hover .livro-imagem {
+            transform: scale(1.05);
+        }
+
+        .livro-info {
+            padding: 1.5rem;
+            text-align: center;
+            background: linear-gradient(to bottom, #fff, #f8f9fa);
+        }
+
+        .livro-titulo {
+            font-size: 1.2rem;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .livro-autor {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+        }
+
+        .livro-descricao {
+            color: #777;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            display: none;
+        }
+
+        .livro-card:hover .livro-descricao {
+            display: block;
+        }
+
+        .livro-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+            z-index: 1;
+        }
+
+        .livro-card:hover .livro-badge {
+            background: #ff5252;
+        }
+
+        /* Variações de cores para os cards */
+        .livro-card:nth-child(odd) .livro-info {
+            background: linear-gradient(to bottom, #fff, #f0f2f5);
+        }
+
+        .livro-card:nth-child(even) .livro-info {
+            background: linear-gradient(to bottom, #fff, #e8eaf6);
+        }
+
+        /* Responsividade */
+        @media (max-width: 992px) {
+            .galeria {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, auto);
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .galeria {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, auto);
+            }
+            
+            body {
+                padding: 1rem;
+            }
+            
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Animações */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .livro-card {
+            animation: fadeIn 0.6s ease-out forwards;
+        }
+
+        .livro-card:nth-child(1) { animation-delay: 0.1s; }
+        .livro-card:nth-child(2) { animation-delay: 0.2s; }
+        .livro-card:nth-child(3) { animation-delay: 0.3s; }
+        .livro-card:nth-child(4) { animation-delay: 0.4s; }
+        .livro-card:nth-child(5) { animation-delay: 0.5s; }
+        .livro-card:nth-child(6) { animation-delay: 0.6s; }
+    </style>
 </head>
 <body>
-    Melhor do que nos filmes
+    <div class="container">
+        <h1>📚 Série "Melhor do que nos Filmes"</h1>
+        <div class="subtitulo">Uma história de amor que vai te fazer suspirar ❤️</div>
+        
+        <div class="galeria">
+            <!-- Card 1 - Melhor do que nos Filmes (Capa 1) -->
+            <div class="livro-card">
+                <span class="livro-badge">Best-seller</span>
+                <img src="https://via.placeholder.com/400x300/FF6B6B/FFFFFF?text=Melhor+do+que+nos+Filmes+1" alt="Capa do livro Melhor do que nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Melhor do que nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">Uma comédia romântica irresistível sobre Liz, uma adolescente que sempre sonhou com um amor digno de cinema.</p>
+                </div>
+            </div>
 
-    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLSudcQ1MBTmIbbng_yLx3Neu77KVOHKOfUg&s">
+            <!-- Card 2 - Melhor do que nos Filmes (Capa 2) -->
+            <div class="livro-card">
+                <span class="livro-badge">Edição Especial</span>
+                <img src="https://via.placeholder.com/400x300/4ECDC4/FFFFFF?text=Melhor+do+que+nos+Filmes+2" alt="Capa alternativa do livro Melhor do que nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Melhor do que nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">Uma história sobre amizade, primeiros amores e momentos que parecem cenas de cinema.</p>
+                </div>
+            </div>
 
+            <!-- Card 3 - Melhor do que nos Filmes (Capa 3) -->
+            <div class="livro-card">
+                <span class="livro-badge">Edição de Colecionador</span>
+                <img src="https://via.placeholder.com/400x300/45B7D1/FFFFFF?text=Melhor+do+que+nos+Filmes+3" alt="Terceira capa do livro Melhor do que nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Melhor do que nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">Descubra por que este livro conquistou o coração de milhares de leitores ao redor do mundo.</p>
+                </div>
+            </div>
 
+            <!-- Card 4 - Não é como nos Filmes (Capa 1) -->
+            <div class="livro-card">
+                <span class="livro-badge">Continuação</span>
+                <img src="https://via.placeholder.com/400x300/96CEB4/FFFFFF?text=Não+é+como+nos+Filmes+1" alt="Capa do livro Não é como nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Não é como nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">A continuação emocionante que mostra que o amor verdadeiro pode ser ainda melhor que a ficção.</p>
+                </div>
+            </div>
 
+            <!-- Card 5 - Não é como nos Filmes (Capa 2) -->
+            <div class="livro-card">
+                <span class="livro-badge">Novidade</span>
+                <img src="https://via.placeholder.com/400x300/FFE194/333333?text=Não+é+como+nos+Filmes+2" alt="Capa alternativa do livro Não é como nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Não é como nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">Prepare-se para se emocionar com esta história que vai além dos clichês de Hollywood.</p>
+                </div>
+            </div>
 
+            <!-- Card 6 - Não é como nos Filmes (Capa 3) -->
+            <div class="livro-card">
+                <span class="livro-badge">Lançamento</span>
+                <img src="https://via.placeholder.com/400x300/DDA0DD/333333?text=Não+é+como+nos+Filmes+3" alt="Terceira capa do livro Não é como nos Filmes" class="livro-imagem">
+                <div class="livro-info">
+                    <h3 class="livro-titulo">Não é como nos Filmes</h3>
+                    <p class="livro-autor">Lynn Painter</p>
+                    <p class="livro-descricao">Uma jornada inesquecível sobre amor, superação e a beleza dos momentos imperfeitos.</p>
+                </div>
+            </div>
+        </div>
 
+        <div style="text-align: center; margin-top: 2rem; color: #666; font-size: 0.9rem;">
+            <p>✨ Clique ou passe o mouse sobre os cards para mais detalhes ✨</p>
+        </div>
+    </div>
 </body>
 </html>
